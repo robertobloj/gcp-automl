@@ -20,10 +20,17 @@ class AutoMLClientAppCommand : CliktCommand() {
     override fun run() {
         val resolvedPath = PathResolverFactory.resolve(path)
         val client = PredictionServiceClient.create()
-        File(resolvedPath.toString()).walk().forEach {
-            println(it.absolutePath)
-            val modelName = ModelName.of(projectId, "us-central1", modelId)
-            val content = ByteString.copyFrom(Files.readAllBytes(Paths.get(it.absolutePath)))
+        val modelName = ModelName.of(projectId, "us-central1", modelId)
+        File(resolvedPath.toString()).walk().forEach loop@{
+            val file = Paths.get(it.absolutePath)
+            if (Files.isDirectory(file)) {
+                println("File is a dir: %s, skipping it...".format(it.absolutePath))
+                return@loop
+            }
+
+            val absolutePath = Paths.get(it.absolutePath)
+            val allBytes = Files.readAllBytes(absolutePath)
+            val content = ByteString.copyFrom(allBytes)
             val image = Image.newBuilder().setImageBytes(content).build()
             val payload = ExamplePayload.newBuilder().setImage(image).build()
             val request = PredictRequest.newBuilder().setName(modelName.toString())
