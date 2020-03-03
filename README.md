@@ -12,7 +12,7 @@ You need to have [GCP SDK](https://cloud.google.com/sdk) installed.
 
 1. Log into your GCP:
 
-```console
+```cmd
 gcloud auth login
 ```
 
