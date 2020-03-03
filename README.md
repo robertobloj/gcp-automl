@@ -20,27 +20,27 @@ gcloud auth login
 
 2. [Create new project] and set is as current project: 
 
-```console
+```
 gcloud projects create PROJECT_ID [--organization ORG_NAME]
 gcloud config set project PROJECT_ID
 ```
 
 Check project details:
 
-```console
+```
 gcloud projects describe PROJECT_ID
 ```
 
 3. [Create service account]: 
 
-```console
+```
 gcloud iam service-accounts create SERVICE_ACCOUNT --display-name="ServiceAccount"
 ```
 
 Notice that `SERVICE_ACCOUNT` is not an ID for account. ID is built based on `SERVICE_ACCOUNT` and `PROJECT_ID`, 
 for example:
 
-```console
+```
 gcloud projects create EXAMPLE_PROJECT
 gcloud iam service-accounts create EXAMPLE_ACCOUNT 
 
@@ -50,7 +50,7 @@ set SERVICE_ACCOUNT_ID=EXAMPLE_ACCOUNT@EXAMPLE_PROJECT.iam.gserviceaccount.com
 
 4. [Add permissions]:
 
-```console
+```
 gcloud projects add-iam-policy-binding PROJECT_ID --member="serviceAccount:SERVICE_ACCOUNT_ID" \ 
     --role "roles/automl.editor"
 ```
@@ -59,7 +59,7 @@ gcloud projects add-iam-policy-binding PROJECT_ID --member="serviceAccount:SERVI
 
 Before we create key, lets check what we have:
 
-```console
+```
 gcloud iam service-accounts keys list --iam-account=SERVICE_ACCOUNT_ID
 
 # output
@@ -69,7 +69,7 @@ SOME_KEY_ID_f7dacee50f5607beb0020d782e21  2020-03-03T10:36:03Z  2022-03-27T23:59
 
 Lets create new key for `service account`:
 
-```console
+```
 gcloud iam service-accounts keys create OUTPUT_JSON_FILE --iam-account=SERVICE_ACCOUNT_ID
 ```
 
@@ -79,7 +79,7 @@ Notice this key should remain private, so do not push it to git, etc.
 
 6. Check your [billing accounts]:
 
-```console
+```
 gcloud beta billing accounts list
 
 # Example output
@@ -89,13 +89,13 @@ SOMEID-B3F4EE-AA567B  My Billing Account  True
 
 7. [Connect project with your billing account]:
 
-```console
+```
 gcloud beta billing projects link PROJECT_ID  --billing-account=ACCOUNT_ID
 ```
 
 8. Create google storage bucket (at least for now it must be `us-central1`)
 
-```console
+```
 gsutil mb -p PROJECT_ID -c regional -l us-central1 gs://PROJECT_ID-vcm/
 ```
 
@@ -103,13 +103,13 @@ gsutil mb -p PROJECT_ID -c regional -l us-central1 gs://PROJECT_ID-vcm/
 
 In this step we copy example dataset from google storage bucket, but we can prepare own dataset as well:
 
-```console
+```
 gsutil -m cp -R gs://cloud-ml-data/img/flower_photos/ gs://PROJECT_ID-vcm/img/
 ``` 
 
 10. Prepare csv file for training process:
 
-```console
+```
 gsutil cat gs://PROJECT_ID-vcm/img/flower_photos/all_data.csv | sed "s:cloud-ml-data:PROJECT_ID-vcm:" \ 
     > all_data.csv
 gsutil cp all_data.csv gs://PROJECT_ID-vcm/csv/
@@ -128,7 +128,7 @@ gs://PROJECT_ID-vcm/img/flower_photos/daisy/10172379554_b296050f82_n.jpg,daisy
 
 11. [Enable api] for  `AutoML`:
 
-```console
+```
 gcloud services enable "automl.googleapis.com"
 ```
 
@@ -142,7 +142,7 @@ gcloud services enable "automl.googleapis.com"
 
 To run prediction you need to configure google credentials: 
 
-```console
+```
 set GOOGLE_APPLICATION_CREDENTIALS=SOME_PATH/OUTPUT_JSON_FILE
 ```
 
@@ -150,7 +150,7 @@ This is required step to run prediction.
 
 3. Make a prediction
 
-Run `AutoMLApp`:
+Run `AutoMLApp` application:
 
 ![Edit configuration](docs/img/automl-runConfiguration.png)
 
@@ -158,7 +158,7 @@ Run `AutoMLApp`:
 3. [Undeploy model]
 4. Remove Google Storage Bucket
 
-```console
+```
 gsutil rm -r gs://PROJECT_ID-vcm/
 ``` 
 
