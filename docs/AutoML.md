@@ -2,10 +2,6 @@
 
 [AutoML Vision] enables training machine learning models to classify images. 
 
-## Prerequisites
-
-You need to have [GCP SDK](https://cloud.google.com/sdk) installed.
-
 ## Setup
 
 ### Login into GCP
