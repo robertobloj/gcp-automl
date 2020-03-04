@@ -21,5 +21,5 @@ gcloud auth login
 
 ## Read more
 
-[Read more](https://cloud.google.com/sdk/gcloud/reference) about `gcloud SDK`.
+[Read more](https://cloud.google.com/sdk/gcloud/reference) about `gcloud SDK`.<br/>
 [Read more](https://cloud.google.com/storage/docs/gsutil) about `gsutil SDK`.
