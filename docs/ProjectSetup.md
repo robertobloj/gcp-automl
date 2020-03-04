@@ -6,14 +6,14 @@ You have to be logged into GCP.
 
 ## Create project
 
-[Create new project] and set is as current project: 
+1. [Create new project] and set is as current project: 
 
 ```
 gcloud projects create PROJECT_ID [--organization ORG_NAME]
 gcloud config set project PROJECT_ID
 ```
 
-Check project details:
+2. Check project details:
 
 ```
 gcloud projects describe PROJECT_ID
@@ -21,13 +21,13 @@ gcloud projects describe PROJECT_ID
 
 ## Create Service Account
 
-[Create service account]: 
+1. [Create service account]: 
 
 ```
 gcloud iam service-accounts create SERVICE_ACCOUNT --display-name="ServiceAccount"
 ```
 
-Notice that `SERVICE_ACCOUNT` is not an ID for account. ID is built based on `SERVICE_ACCOUNT` and `PROJECT_ID`, 
+2. Notice that `SERVICE_ACCOUNT` is not an ID for account. ID is built based on `SERVICE_ACCOUNT` and `PROJECT_ID`, 
 for example:
 
 ```
@@ -40,7 +40,7 @@ set SERVICE_ACCOUNT_ID=EXAMPLE_ACCOUNT@EXAMPLE_PROJECT.iam.gserviceaccount.com
 
 ## Create User key
 
-Before we [create key], lets check what we have:
+1. Before we [create key], lets check what we have:
 
 ```
 gcloud iam service-accounts keys list --iam-account=SERVICE_ACCOUNT_ID
@@ -50,17 +50,17 @@ KEY_ID                                    CREATED_AT            EXPIRES_AT
 SOME_KEY_ID_f7dacee50f5607beb0020d782e21  2020-03-03T10:36:03Z  2022-03-27T23:59:24Z
 ```
 
-Lets create new key for `service account`:
+2. Lets create new key for `service account`:
 
 ```
 gcloud iam service-accounts keys create OUTPUT_JSON_FILE --iam-account=SERVICE_ACCOUNT_ID
 ```
 
-Notice this key should remain private, so do not push it to git, etc. 
+3. Notice this key should remain private, so do not push it to git, etc. 
 
 ## Connect Service Account and Billing Account
 
-Check your [billing accounts]:
+1. Check your [billing accounts]:
 
 ```
 gcloud beta billing accounts list
@@ -70,7 +70,7 @@ ACCOUNT_ID            NAME                OPEN  MASTER_ACCOUNT_ID
 SOMEID-B3F4EE-AA567B  My Billing Account  True
 ```
 
-[Connect project with your billing account]:
+2. [Connect project with your billing account]:
 
 ```
 gcloud beta billing projects link PROJECT_ID  --billing-account=ACCOUNT_ID
