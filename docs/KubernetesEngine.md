@@ -5,7 +5,9 @@
 1. [Create cluster]:
 
 ```
-gcloud container clusters create --enable-ip-alias --enable-autoupgrade --zone "us-central1-c" --addons HorizontalPodAutoscaling,HttpLoadBalancing --enable-autoupgrade --enable-autorepair [CLUSTER_NAME] 
+gcloud container clusters create --enable-ip-alias --enable-autoupgrade \ 
+    --zone "us-central1-c" --addons HorizontalPodAutoscaling,HttpLoadBalancing \ 
+    --enable-autoupgrade --enable-autorepair [CLUSTER_NAME] 
 ```
 
 ## Setup credentials
@@ -28,9 +30,9 @@ cd examples/guestbook
 1. We must configure proxy before use `kubectl`:
 
 ```
-SET HTTPS_PROXY=
-SET HTTP_PROXY=
-SET NO_PROXY=
+SET HTTPS_PROXY=...
+SET HTTP_PROXY=...
+SET NO_PROXY=...
 ```
 
 ## Deploy redis
@@ -116,18 +118,21 @@ kubectl get service --watch
 2. Copy `EXTERNAL-IP` and open it in a browser
 
 3. You can analyze: 
-    * GCP -> Kubernetes Engine -> Clusters
-    * GCP -> Kubernetes Engine -> Workloads
-    * GCP -> Kubernetes Engine -> Services & Ingress
+    * GCP -> Kubernetes Engine -> [Clusters]
+    * GCP -> Kubernetes Engine -> [Workloads]
+    * GCP -> Kubernetes Engine -> [Services & Ingress]
 
 ## Clean
 
 1. [Delete cluster]:
 
 ```
-gcloud container clusters delete CLUSTER_NAME
+gcloud container clusters delete --zone="us-central1-c" CLUSTER_NAME
 ```
 
 [Create cluster]: https://cloud.google.com/sdk/gcloud/reference/container/clusters/create
 [Setup credentials]: https://cloud.google.com/sdk/gcloud/reference/container/clusters/get-credentials
 [Delete cluster]: https://cloud.google.com/sdk/gcloud/reference/container/clusters/delete
+[Clusters]: https://console.cloud.google.com/kubernetes/
+[Workloads]: https://console.cloud.google.com/kubernetes/workload
+[Services & Ingress]: https://console.cloud.google.com/kubernetes/discovery
