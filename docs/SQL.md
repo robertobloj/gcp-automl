@@ -32,7 +32,7 @@ gcloud sql ssl client-certs describe COMMON_NAME --instance INSTANCE --flatten c
     sed -- 's/  //g' | sed -- 's/^-^-^- ^|^-//g' > CERT_FILE
 ```
 
-## \[OPTIONAL STEP\] Create database and user:
+## OPTIONAL STEP - Create database and user:
 
 1. [Create database]:
 
