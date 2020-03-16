@@ -4,14 +4,14 @@
 
 1. [Create instance]:
 
-```
+```console
 gcloud sql instances create INSTANCE --region="us-central" \ 
     --database-version=MYSQL_5_7 --root-password PASSWORD --require-ssl
 ```
 
 2. Because we enabled ssl with previous step, we need to [create client certificate] for database instance
 
-```
+```console
 gcloud sql ssl client-certs create COMMON_NAME CERT_FILE --instance INSTANCE
 ``` 
 
@@ -21,13 +21,13 @@ Notice this command downloads private key into `CERT_FILE`.
 
 Before we download, check whether we have certificate:
 
-```
+```console
 gcloud sql ssl client-certs list --instance INSTANCE
 ```
 
-There is no direct download command, so we need to do it in [following way] :
+There is no direct download command, so we need to do it in [following way](https://cloud.google.com/sdk/gcloud/reference/sql/ssl/client-certs/describe) :
 
-```
+```console
 gcloud sql ssl client-certs describe COMMON_NAME --instance INSTANCE --flatten cert | \ 
     sed -- 's/  //g' | sed -- 's/^-^-^- ^|^-//g' > CERT_FILE
 ```
@@ -36,13 +36,13 @@ gcloud sql ssl client-certs describe COMMON_NAME --instance INSTANCE --flatten c
 
 1. [Create database]:
 
-```
+```console
 gcloud sql databases create DATABASE --instance INSTANCE
 ```
 
 2. [Create user]:
 
-```
+```console
 gcloud sql users create USER --instance INSTANCE --password PASSWORD --host %
 ```
 
