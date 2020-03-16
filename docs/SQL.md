@@ -25,7 +25,7 @@ Before we download, check whether we have certificate:
 gcloud sql ssl client-certs list --instance INSTANCE
 ```
 
-There is no direct download command, so we need to do it in [following way](https://cloud.google.com/sdk/gcloud/reference/sql/ssl/client-certs/describe) :
+There is no direct download command, so we need to do it in [following way]:
 
 ```
 gcloud sql ssl client-certs describe COMMON_NAME --instance INSTANCE --flatten cert | \ 
@@ -47,8 +47,6 @@ gcloud sql users create USER --instance INSTANCE --password PASSWORD --host %
 ```
 
 ## Connect to database
-
-[Connect to database]
 
 1. Before connect we need to [install mysql] client and add it to `PATH`
 
