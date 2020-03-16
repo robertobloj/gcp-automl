@@ -15,9 +15,23 @@ gcloud auth login
 
 ## Examples
 
+### Setup 
+
 * [Project Setup](docs/ProjectSetup.md)
-* [AutoML Vision](docs/AutoML.md) 
+
+### AI/ ML
+
+* [AutoML Vision](docs/AutoML.md)
+
+### Compute
+  
+* [App Engine](docs/AppEngine.md) 
 * [Kubernetes Engine](docs/KubernetesEngine.md)
+* [Cloud Run](docs/CloudRun.md)
+
+### Storage 
+
+* [SQL](docs/SQL.md)
 
 ## Read more
 

@@ -25,10 +25,11 @@ Before we download, check whether we have certificate:
 gcloud sql ssl client-certs list --instance INSTANCE
 ```
 
-There is no direct download command, so we need to do it in [following way]:
+There is no direct download command, so we need to do it in [following way] :
 
 ```
-gcloud sql ssl client-certs describe COMMON_NAME --instance INSTANCE --flatten cert | sed -- 's/  //g' | sed -- 's/^-^-^- ^|^-//g' > CERT_FILE
+gcloud sql ssl client-certs describe COMMON_NAME --instance INSTANCE --flatten cert | \ 
+    sed -- 's/  //g' | sed -- 's/^-^-^- ^|^-//g' > CERT_FILE
 ```
 
 ## \[OPTIONAL STEP\] Create database and user:
